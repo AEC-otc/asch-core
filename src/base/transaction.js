@@ -301,17 +301,17 @@ Transaction.prototype.apply = async (context) => {
   if (block.height !== 0) {
     if (transactionMode.isRequestMode(trs.mode) && !context.activating) {
       const requestorFee = 20000000
-      if (requestor.xas < requestorFee) throw new Error('Insufficient requestor balance')
-      requestor.xas -= requestorFee
+      if (requestor.aec < requestorFee) throw new Error('Insufficient requestor balance')
+      requestor.aec -= requestorFee
       app.addRoundFee(requestorFee, modules.round.calc(block.height))
       // trs.executed = 0
       app.sdb.create('TransactionStatu', { tid: trs.id, executed: 0 })
-      app.sdb.update('Account', { xas: requestor.xas }, { address: requestor.address })
+      app.sdb.update('Account', { aec: requestor.aec }, { address: requestor.address })
       return
     }
-    if (sender.xas < trs.fee) throw new Error('Insufficient sender balance')
-    sender.xas -= trs.fee
-    app.sdb.update('Account', { xas: sender.xas }, { address: sender.address })
+    if (sender.aec < trs.fee) throw new Error('Insufficient sender balance')
+    sender.aec -= trs.fee
+    app.sdb.update('Account', { aec: sender.aec }, { address: sender.address })
   }
 
   const error = await fn.apply(context, trs.args)

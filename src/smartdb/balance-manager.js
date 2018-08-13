@@ -1,6 +1,6 @@
 
 function getCurrencyFlag(currency) {
-  if (currency === 'XAS') {
+  if (currency === 'AEC') {
     return 1
   } if (currency.indexOf('.') !== -1) {
     // UIA

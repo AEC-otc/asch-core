@@ -172,7 +172,7 @@ module.exports = async function runtime(options) {
     contractTypeMapping: {},
     feeMapping: {},
     defaultFee: {
-      currency: 'XAS',
+      currency: 'AEC',
       min: '10000000',
     },
     hooks: {},
