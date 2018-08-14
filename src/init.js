@@ -35,9 +35,9 @@ const moduleNames = [
   'delegates',
   'round',
   'uia',
-  'chains',
+  // 'chains',
   'blocks',
-  'gateway',
+  // 'gateway',
 ]
 
 const CIPHERS = `
