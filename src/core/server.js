@@ -1,5 +1,6 @@
 const Router = require('../utils/router.js')
 const sandboxHelper = require('../utils/sandbox.js')
+const constants = require('../utils/constants.js')
 
 let modules
 let library
@@ -31,11 +32,13 @@ priv.attachApi = () => {
   })
 
   router.get('/api/blocks/totalsupply', (req, res) => {
-    res.status(200).send(`${modules.blocks.getSupply() / 100000000}`)
+    // res.status(200).send(`${modules.blocks.getSupply() / 100000000}`)
+    res.status(200).send(`${modules.blocks.getSupply() / constants.fixedPoint}`)
   })
 
   router.get('/api/blocks/circulatingsupply', (req, res) => {
-    res.status(200).send(`${modules.blocks.getCirculatingSupply() / 100000000}`)
+    // res.status(200).send(`${modules.blocks.getCirculatingSupply() / 100000000}`)
+    res.status(200).send(`${modules.blocks.getCirculatingSupply() / constants.fixedPoint}`)
   })
 
   router.get('/chains/:id', (req, res) => {
