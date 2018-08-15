@@ -1,4 +1,5 @@
 const constants = require('./constants.js')
+const slots = require('./slots.js')
 
 function BlockStatus() {
   // const milestones = [
@@ -19,7 +20,7 @@ function BlockStatus() {
   const firstStage = 3 * 365 * 24 * 60 * 60
   const secondStage = 5 * 365 * 24 * 60 * 60
   const thirdStage = 5 * 365 * 24 * 60 * 60
-  const interval = modules.slots.interval
+  const interval = slots.interval
 
   // const distance = 3000000 // Distance between each milestone
   let rewardOffset = 1 // Start rewards at block (n)
