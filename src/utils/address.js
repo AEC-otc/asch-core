@@ -1,7 +1,8 @@
 const crypto = require('crypto')
 const base58check = require('./base58check')
 
-const NORMAL_PREFIX = 'A'
+// const NORMAL_PREFIX = 'A'
+const NORMAL_PREFIX = 'B'
 const CHAIN_PREFIX = 'C'
 const GROUP_PREFIX = 'G'
 
