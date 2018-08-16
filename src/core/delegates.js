@@ -6,6 +6,7 @@ const slots = require('../utils/slots.js')
 const BlockStatus = require('../utils/block-status.js')
 const sandboxHelper = require('../utils/sandbox.js')
 const addressHelper = require('../utils/address.js')
+const constants = require('../utils/constants.js')
 
 let modules
 let library
@@ -237,7 +238,8 @@ priv.loop = (cb) => {
   }
 
   // if (Date.now() % 10000 > 5000) {
-  if (Date.now() % 15000 > 5000) {
+  // if (Date.now() % 15000 > 5000) {
+  if (Date.now() % (constants.interval * 1000) > 5000) {
     library.logger.trace('Loop:', 'maybe too late to collect votes')
     return setImmediate(cb)
   }

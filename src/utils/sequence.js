@@ -1,8 +1,10 @@
 const util = require('util')
 const async = require('async')
+const constants = require('./constants.js')
 
 // const TASK_TIMEOUT_MS = 10 * 1000
-const TASK_TIMEOUT_MS = 15 * 1000
+// const TASK_TIMEOUT_MS = 15 * 1000
+const TASK_TIMEOUT_MS = constants.interval * 1000
 
 function tick(task, cb) {
   let isCallbacked = false

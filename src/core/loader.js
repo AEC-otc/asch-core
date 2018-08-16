@@ -1,6 +1,8 @@
 const Router = require('../utils/router.js')
 const sandboxHelper = require('../utils/sandbox.js')
 const slots = require('../utils/slots.js')
+const constants = require('../utils/constants.js')
+
 require('colors')
 
 let modules
@@ -261,8 +263,9 @@ Loader.prototype.onPeerReady = () => {
     if (slots.getNextSlot() - lastSlot >= 3) {
       self.startSyncBlocks()
     }
-    // setTimeout(nextSync, 10 * 1000)
-    setTimeout(nextSync, 15 * 1000)
+    // // setTimeout(nextSync, 10 * 1000)
+    // setTimeout(nextSync, 15 * 1000)
+    setTimeout(nextSync, constants.interval * 1000)
   })
 
   setImmediate(() => {

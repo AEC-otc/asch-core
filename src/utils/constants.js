@@ -17,4 +17,5 @@ module.exports = {
   fixedPoint: 10 ** 6,
   totalAmount: 2500000000000000,
   maxTxsPerBlock: 20000,
+  interval: 15,
 }
