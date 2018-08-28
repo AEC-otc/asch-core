@@ -146,23 +146,28 @@ Blocks.prototype.getBlock = (filter, cb) => {
 
 Blocks.prototype.setLastBlock = (block) => {
   priv.lastBlock = block
-  if (global.Config.netVersion === 'mainnet') {
-    global.featureSwitch.enableLongId = priv.lastBlock.height >= 1700000
-    global.featureSwitch.enable1_3_0 = priv.lastBlock.height >= 2920000
-    global.featureSwitch.enableClubBonus = priv.lastBlock.height >= 3320000
-    global.featureSwitch.enableMoreLockTypes = global.featureSwitch.enableClubBonus
-    global.featureSwitch.enableLockReset = priv.lastBlock.height >= 4290000
-  } else {
-    global.featureSwitch.enableLongId = true
-    global.featureSwitch.enable1_3_0 = true
-    global.featureSwitch.enableClubBonus = (!!global.state.clubInfo)
-    global.featureSwitch.enableMoreLockTypes = true
-    global.featureSwitch.enableLockReset = true
-  }
+  // if (global.Config.netVersion === 'mainnet') {
+  //   global.featureSwitch.enableLongId = priv.lastBlock.height >= 1700000
+  //   global.featureSwitch.enable1_3_0 = priv.lastBlock.height >= 2920000
+  //   global.featureSwitch.enableClubBonus = priv.lastBlock.height >= 3320000
+  //   global.featureSwitch.enableMoreLockTypes = global.featureSwitch.enableClubBonus
+  //   global.featureSwitch.enableLockReset = priv.lastBlock.height >= 4290000
+  // } else {
+  //   global.featureSwitch.enableLongId = true
+  //   global.featureSwitch.enable1_3_0 = true
+  //   global.featureSwitch.enableClubBonus = (!!global.state.clubInfo)
+  //   global.featureSwitch.enableMoreLockTypes = true
+  //   global.featureSwitch.enableLockReset = true
+  // }
+  global.featureSwitch.enableLongId = true
+  global.featureSwitch.enable1_3_0 = true
+  global.featureSwitch.enableClubBonus = (!!global.state.clubInfo)
+  global.featureSwitch.enableMoreLockTypes = true
+  global.featureSwitch.enableLockReset = true
   global.featureSwitch.fixVoteNewAddressIssue = true
-  if (global.Config.netVersion === 'mainnet' && priv.lastBlock.height < 1854000) {
-    global.featureSwitch.fixVoteNewAddressIssue = false
-  }
+  // if (global.Config.netVersion === 'mainnet' && priv.lastBlock.height < 1854000) {
+  //   global.featureSwitch.fixVoteNewAddressIssue = false
+  // }
   global.featureSwitch.enableUIA = global.featureSwitch.enableLongId
 }
 
@@ -242,11 +247,11 @@ Blocks.prototype.verifyBlock = async (block, options) => {
   }
 
   // HARDCODE_HOT_FIX_BLOCK_6119128
-  if (block.height > 6119128) {
-    if (payloadHash.digest().toString('hex') !== block.payloadHash) {
-      throw new Error(`Invalid payload hash: ${block.id}`)
-    }
+  // if (block.height > 6119128) {
+  if (payloadHash.digest().toString('hex') !== block.payloadHash) {
+    throw new Error(`Invalid payload hash: ${block.id}`)
   }
+  // }
 
   if (options.votes) {
     const votes = options.votes
@@ -428,7 +433,8 @@ Blocks.prototype.applyRound = async (block) => {
   const forgedBlocks = await app.sdb.getBlocksByHeightRange(block.height - 100, block.height - 1)
   const forgedDelegates = [...forgedBlocks.map(b => b.delegate), block.delegate]
 
-  const missedDelegates = forgedDelegates.filter(fd => !delegates.includes(fd))
+  // const missedDelegates = forgedDelegates.filter(fd => !delegates.includes(fd))
+  const missedDelegates = delegates.filter(fd => !forgedDelegates.includes(fd))
   missedDelegates.forEach((md) => {
     address = addressHelper.generateNormalAddress(md)
     app.sdb.increase('Delegate', { missedDelegate: 1 }, { address })
