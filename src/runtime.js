@@ -341,7 +341,7 @@ module.exports = async function runtime(options) {
 
   app.contractTypeMapping[300] = 'proposal.propose'
   app.contractTypeMapping[301] = 'proposal.vote'
-  app.contractTypeMapping[302] = 'proposal.activate'
+  // app.contractTypeMapping[302] = 'proposal.activate'
 
   // app.contractTypeMapping[400] = 'gateway.openAccount'
   // app.contractTypeMapping[401] = 'gateway.registerMember'
